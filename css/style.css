@@ -1,0 +1,40 @@
+.profile{
+    display: flex;
+    border: solid 1px grey;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgb(130, 125, 123);
+}
+h1{
+    text-decoration: underline;
+}
+.profiletab{
+    display: flex;
+    border: solid 1px grey;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    background-color:grey;
+    color: black;
+    font-size: x-large;
+}
+.img{
+    background-color: rgb(246, 219, 87);
+    border: solid 1px grey;
+    border-radius: 20px;
+    
+}
+.serial{
+    position: relative;
+}
+.pname{
+    color: black;
+}
+.pokename{
+    display: flex;
+    flex-direction: row;
+}
+.none{
+    display: none;
+}

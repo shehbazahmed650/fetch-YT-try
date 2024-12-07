@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="profile">
+        <h1>Pokemon Specifications With Image</h1>
+        <div class="img">
+            <div> <span id="image"></span></div>
+        </div>
+        <h2>Name: <span id="name"></span> </h2>
+        <h2>Abilities: <span id="abilities"></span> </h2>
+        <h2>Types: <span id="types"></span></h2>
+        <h2>Height: <span id="height"></span> meter</h2>
+        <h2>Weight: <span id="weight"></span> hectogram</h2>
+    </div>
+
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search)
+        const id = urlParams.get('api')
+        fetch("https://pokeapi.co/api/v2/pokemon/" + id)
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                let name = `${data.name}`
+                document.getElementById("name").innerHTML += name;
+
+                let image = `<img src="${data.sprites.front_default}" width="250" height="200">`;
+                document.getElementById("image").innerHTML += image;
+
+
+                let abilities = `${"data.abilities[i].ability.name"}`;
+                for (let i = 0; i < data.abilities.length; i++) {
+                    document.getElementById("abilities").innerHTML += `${data.abilities[i].ability.name}`;
+                }
+                let types = `${"data.types[i].type.name"}`;
+                for (let i = 0; i < data.types.length; i++) {
+                    document.getElementById("types").innerHTML += `${data.types[i].type.name}`
+                }
+                let height = `${data.height}`
+                document.getElementById("height").innerHTML += height;
+                let weight = `${data.weight}`
+                document.getElementById("weight").innerHTML += weight;
+            })
+            .catch((error) => {
+                console.error(error);
+            })    
+    </script>
+</body>
+
+</html>

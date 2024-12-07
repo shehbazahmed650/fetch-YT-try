@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="profiletab">
+        <h1>THE INFORMATION TO POKEMON</h1>
+        <div class="pokename">
+            <div id="myList">
+
+            </div>
+        </div>
+        <div class="none">
+            <h3>Total Pokemons: <span id="count"></span></h3>
+            <h3>Next: <span id="next"></span></h3>
+            <h3>prevous: <span id="previous"></span></h3>
+        </div>
+    </div>
+
+    <script>
+        let count = 0;
+        let next = "";
+        let previous = "";
+        fetch("https://pokeapi.co/api/v2/pokemon")
+            .then(response => {
+                return response.json();
+            })
+            .then((data) => {
+                count = data.count;
+                next = data.next;
+                previous = data.previous;
+                document.getElementById("count").innerHTML = count;
+                document.getElementById("next").innerHTML = next;
+                document.getElementById("previous").innerHTML = previous;
+                let result = data.results;
+                for (i = 0; i < result.length; i++) {
+                    document.getElementById("myList").innerHTML +=
+                        `<h3> (${i + 1}) </h3>
+                <h3><a href="profile.html?api=${i + 1}">${result[i].name}</a> </h3>`
+                }
+                let image = `<img src="${data.sprites.front_default}" width="300" height="250">`;
+                for (let i = 0; i < data.image.length; i++) {
+                    document.getElementById("indeximg").innerHTML += `<img src="${data.sprites.front_default}" width="250" height="200">`
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    </script>
+</body>
+
+</html>
